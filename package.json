@@ -1,0 +1,53 @@
+{
+  "name": "prompts",
+  "version": "2.0.0",
+  "description": "Transform rough ideas into precision-engineered prompts for Claude Code",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "bin": {
+    "prompts": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "prompt-engineering",
+    "ai"
+  ],
+  "author": "Trent Tuttle <trent@trents.tech>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.3.5",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "files": [
+    "dist",
+    "shipped-rules",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "claude-plugin": {
+    "name": "prompts",
+    "version": "2.0.0",
+    "entrypoint": "dist/index.js",
+    "commands": [
+      "prompts"
+    ],
+    "hooks": {
+      "UserPromptSubmit": "dist/hooks/user-prompt-submit.js",
+      "PreToolUse": "dist/hooks/pre-tool-use.js",
+      "PostToolUse": "dist/hooks/post-tool-use.js",
+      "Stop": "dist/hooks/stop.js"
+    }
+  }
+}
